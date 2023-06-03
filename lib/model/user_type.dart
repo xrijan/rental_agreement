@@ -1,0 +1,1 @@
+enum UserTypeRadio { owner, tenant, other }
