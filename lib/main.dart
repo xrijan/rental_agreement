@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rental_agreement/screens/temp_onBoarding.dart';
+import 'package:rental_agreement/screens/login/login_screen.dart';
+import 'package:rental_agreement/screens/login/verification_screen.dart';
+import 'package:rental_agreement/screens/main_page.dart';
 
 
 void main() {
@@ -14,9 +16,11 @@ class RentalAgreementApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rental Agreement',
-      initialRoute: '/',
+      initialRoute: '/loginScreen',
       routes: {
-        '/': (context) =>  const Temp(),
+        '/': (context) =>  const Verification(),
+        '/loginScreen' : (context) => const LogInScreen(),
+        '/main' : (context) => const MainPage(),
       },
     );
   }

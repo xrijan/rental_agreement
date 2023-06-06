@@ -21,4 +21,6 @@ class MyColors {
   static const Color kMonthlyActiveColor = Color(0xFF953AF0);
   static const Color kSatisfiedClientColor = Color(0xFFD68431);
   static const Color kLawyerColor = Color(0xFF489D7F);
+
+  static const kLitePrimaryColor = Color(0xFF437EF5);
 }

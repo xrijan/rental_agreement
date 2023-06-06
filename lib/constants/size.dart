@@ -10,8 +10,8 @@ class MySize {
   static double kSizeBoxHeight20 = MySize.kScreenHeight * 0.020;
 
   ///fonts size
-  static double kHeading1 = 28;
-  static double kHeading2 = 18;
-  static double kHeading3 = 14;
+  static double kHeading1 = 24;
+  static double kHeading2 = 14;
+  static double kHeading3 = 10;
   ///test
 }

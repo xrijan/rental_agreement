@@ -5,8 +5,10 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:rental_agreement/utilities.dart';
 import 'package:rental_agreement/widgets/elevated_button_widget.dart';
 import '../../constants/colors.dart';
+import '../../constants/right_to_left_screen.dart';
 import '../../constants/size.dart';
 import '../../constants/validation.dart';
+import 'details_page.dart';
 
 
 class CreatePage extends StatefulWidget {
@@ -225,26 +227,36 @@ class _CreatePageState extends State<CreatePage> {
               const SizedBox(
                 height: 30,
               ),
-              Center(
-                child: ElevatedButtonWidget(height: 50, width: MySize.kScreenWidth/2, title: 'Create', onPressed: (){
-                  if(!Validator().userTypeValidation(userTypeValue, context)){
-                    SnackBarUtil.showSnackBar(context, 'Invalid User name');
-                  } else if(!Validator().validateEmail(emailCtrl.text)){
-                    SnackBarUtil.showSnackBar(context, 'Invalid Email');
-                  } else if(!Validator().validatePhoneNumber(phoneNumberCtrl.text)){
-                    SnackBarUtil.showSnackBar(context, 'Invalid phone number');
-                  }
-                  else {
-                    print(userTypeValue);
-                    print(emailCtrl.text);
-                  }
-                  // Navigator.push(
-                  //   context,
-                  //   RightToLeftRoute(
-                  //     page: const DetailsPage(),
-                  //   ),
-                  // );
-                }),
+              SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0XFF0f172a),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        )),
+                  onPressed: (){
+                    if(!Validator().userTypeValidation(userTypeValue, context)){
+                      SnackBarUtil.showSnackBar(context, 'Invalid User name');
+                    } else if(!Validator().validateEmail(emailCtrl.text)){
+                      SnackBarUtil.showSnackBar(context, 'Invalid Email');
+                    }
+                    else {
+                      print(userTypeValue);
+                      print(emailCtrl.text);
+                      Navigator.push(
+                        context,
+                        RightToLeftRoute(
+                          page: const DetailsPage(),
+                        ),
+                      );
+                    }
+                  },
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(fontSize: MySize.kHeading2),
+                    )),
               ),
             ],
           ),

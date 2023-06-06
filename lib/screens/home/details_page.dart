@@ -166,30 +166,21 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
           Center(
             child: SizedBox(
               height: 50,
-              width: MySize.kScreenWidth / 2,
+              width: double.infinity,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors
-                        .kSecondaryTextColor, // background (button) color
-                    foregroundColor: Colors.white, // foreground (text) color
-                  ),
+                      backgroundColor: Color(0XFF0f172a),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      )),
                   onPressed: () {
+                    setState(() {
+                      if (widget.current < 2) {
+                        widget.current++;
+                      }
 
-                    if (_ownerFormKey.currentState!.validate()) {
-                      _ownerFormKey.currentState!.save(); // Save the form data
-                      // Do something with the form data (e.g. send it to a server)
-                      setState(() {
-                        if (widget.current < 2) {
-                          widget.current++;
-                        }
-
-                        // if (widget.current == 2) {
-                        //   if (kDebugMode) {
-                        //     print('Move to utilities Page');
-                        //   }
-                        // }
-                      });
                     }
+                    );
                   },
                   child: const Text('Next')),
             ),
@@ -240,8 +231,8 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
                     ),
                   ),
                   Container(
-                    height: MySize.kTextFieldHeight,
-                    width: MySize.kTextFieldHeight,
+                    height: 55,
+                    width: 55,
                     decoration: const BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.only(
@@ -379,29 +370,19 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
           Center(
             child: SizedBox(
               height: 50,
-              width: MySize.kScreenWidth / 2,
+              width:  double.infinity,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                    MyColors.kSecondaryTextColor, // background (button) color
-                    foregroundColor: Colors.white, // foreground (text) color
-                  ),
+                      backgroundColor: Color(0XFF0f172a),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      )),
                   onPressed: () {
-                    if (_tenentFormKey.currentState!.validate()) {
-                      _tenentFormKey.currentState!.save(); // Save the form data
-                      // Do something with the form data (e.g. send it to a server)
-                      setState(() {
-                        if (widget.current < 2) {
-                          widget.current++;
-                        }
-
-                        // if (widget.current == 2) {
-                        //   if (kDebugMode) {
-                        //     print('Move to utilities Page');
-                        //   }
-                        // }
-                      });
-                    }
+                    setState(() {
+                      if (widget.current < 2) {
+                        widget.current++;
+                      }
+                    });
                   },
                   child: const Text('Next')),
             ),
@@ -589,29 +570,27 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
             height: MySize.kSizeBoxHeight20,
             width: double.infinity,
           ),
-          Center(
-            child: SizedBox(
-              height: 50,
-              width: MySize.kScreenWidth / 2,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors
-                        .kSecondaryTextColor, // background (button) color
-                    foregroundColor: Colors.white, // foreground (text) color
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      RightToLeftRoute(
-                        page: const UtilitiesPage(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Next',
-                    style: TextStyle(fontSize: MySize.kHeading2),
-                  )),
-            ),
+          SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0XFF0f172a),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    )),
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    RightToLeftRoute(
+                      page: const UtilitiesPage(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Continue',
+                  style: TextStyle(fontSize: MySize.kHeading2),
+                )),
           ),
         ],
       ),

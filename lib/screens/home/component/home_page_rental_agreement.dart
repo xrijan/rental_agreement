@@ -3,10 +3,9 @@ import '../../../constants/colors.dart';
 import '../../../constants/right_to_left_screen.dart';
 import '../../../constants/size.dart';
 import '../create_page.dart';
-import '../main_page.dart';
+import '../../main_page.dart';
 import '../pricing_page.dart';
 import '../upload_page.dart';
-
 
 class RentalAgreement extends StatefulWidget {
   const RentalAgreement({Key? key}) : super(key: key);
@@ -17,10 +16,7 @@ class RentalAgreement extends StatefulWidget {
 
 class _RentalAgreementState extends State<RentalAgreement> {
   List<Map<String, dynamic>> agreementItem = [
-    {
-      'title': 'Create',
-      'icon': const Icon(Icons.create, color: Colors.white)
-    },
+    {'title': 'Create', 'icon': const Icon(Icons.create, color: Colors.white)},
     {
       'title': 'Renew',
       'icon': const Icon(Icons.autorenew, color: Colors.white)
@@ -39,7 +35,7 @@ class _RentalAgreementState extends State<RentalAgreement> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         SizedBox(
+        SizedBox(
           height: MySize.kSizeBoxHeight10,
         ),
         const Text(
@@ -53,7 +49,7 @@ class _RentalAgreementState extends State<RentalAgreement> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   RightToLeftRoute(
@@ -80,12 +76,15 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[0]['icon'],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(agreementItem[0]['title']),
                 ],
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 setState(() {
                   DashboardNavigator(1);
                 });
@@ -109,12 +108,15 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[1]['icon'],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(agreementItem[1]['title']),
                 ],
               ),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   RightToLeftRoute(
@@ -141,13 +143,17 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[2]['icon'],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(agreementItem[2]['title']),
                 ],
               ),
             ),
             GestureDetector(
-              onTap: (){
-                Navigator.push(context, RightToLeftRoute(page: const PricingPage()));
+              onTap: () {
+                Navigator.push(
+                    context, RightToLeftRoute(page: const PricingPage()));
               },
               child: Column(
                 children: [
@@ -167,6 +173,9 @@ class _RentalAgreementState extends State<RentalAgreement> {
                       color: MyColors.kRentalAgreementIconBackgroundColor,
                     ),
                     child: agreementItem[3]['icon'],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Text(agreementItem[3]['title']),
                 ],

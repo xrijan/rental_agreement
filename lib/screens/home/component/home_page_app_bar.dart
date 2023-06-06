@@ -18,93 +18,64 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: SizedBox(
-            height: 75,
-            child: Image.asset(
-              'assets/temp_logo.png',
-              fit: BoxFit.cover,
-            )),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:  const [
-            Text(
-              'Hello, User',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17),
+    return AppBar(
+      backgroundColor: const Color(0XFF0f172a),
+      elevation: 0,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(top: 5,bottom: 5),
+          child: Container(
+            width: 45,
+            decoration: BoxDecoration(
+              color: MyColors.kAppBarIconBackgroundColor,
+              borderRadius: BorderRadius.circular(12),
             ),
-            SizedBox(height: 4,),
-            Text(
-              'Find Top Services with Fixed Price',
-              style: TextStyle(
-                  color: MyColors.kSecondaryTextColor,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 9),
-            )
-          ],
+            child: IconButton(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  RightToLeftRoute(
+                    page: const NotificationPage(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.notifications,
+                color: Colors.white,
+                size: 18,
+              ),
+              tooltip: 'Notifications',
+            ),
+          ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(top: 5,bottom: 5),
-            child: Container(
-              width: 45,
-              decoration: BoxDecoration(
-                color: MyColors.kAppBarIconBackgroundColor,
-                borderRadius: BorderRadius.circular(12),
+        const SizedBox(width: 10,),
+        Padding(
+          padding: const EdgeInsets.only(top: 5,bottom: 5),
+          child: Container(
+            width: 45,
+            decoration: BoxDecoration(
+              color: MyColors.kAppBarIconBackgroundColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: IconButton(
+              onPressed: (){
+                Navigator.push(
+                  context,
+                  RightToLeftRoute(
+                    page: const ProfilePage(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.account_circle,
+                color: Colors.white,
+                size: 18,
               ),
-              child: IconButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    RightToLeftRoute(
-                      page: const NotificationPage(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.notifications,
-                  color: Colors.white,
-                  size: 18,
-                ),
-                tooltip: 'Notifications',
-              ),
+              tooltip: 'Profile',
             ),
           ),
-          const SizedBox(width: 10,),
-          Padding(
-            padding: const EdgeInsets.only(top: 5,bottom: 5),
-            child: Container(
-              width: 45,
-              decoration: BoxDecoration(
-                color: MyColors.kAppBarIconBackgroundColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: IconButton(
-                onPressed: (){
-                  Navigator.push(
-                    context,
-                    RightToLeftRoute(
-                      page: const ProfilePage(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                  size: 18,
-                ),
-                tooltip: 'Profile',
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

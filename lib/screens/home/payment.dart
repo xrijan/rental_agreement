@@ -238,13 +238,13 @@ class _PaymentPageState extends State<PaymentPage> {
           Center(
             child: SizedBox(
               height: 50,
-              width: MySize.kScreenWidth /2 ,
+              width: double.infinity,
               child: ElevatedButton(
-
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.kSecondaryTextColor, // background (button) color
-                    foregroundColor: Colors.white, // foreground (text) color
-                  ),
+                      backgroundColor: Color(0XFF0f172a),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      )),
                   onPressed: (){
 
                   }, child: Text('Pay',style: TextStyle(fontSize: MySize.kHeading2),)),

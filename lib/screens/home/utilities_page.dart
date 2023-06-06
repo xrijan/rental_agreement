@@ -65,11 +65,11 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
   }
 
   Widget _buildIdBox() {
-      String value = paymentModeListCtrl.text;
-        if(value == 'cheque'){
-          const Text('Hi');
-        }
-        return Container();
+    String value = paymentModeListCtrl.text;
+    if (value == 'cheque') {
+      const Text('Hi');
+    }
+    return Container();
   }
 
   @override
@@ -105,11 +105,8 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
                   label: 'Rent payment date',
                   validateMsg:
                       'Please enter the rent payable date(every month)'),
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Text("Click here to view default clauses")),
               SizedBox(
-                height: MySize.kSizeBoxHeight10,
+                height: MySize.kSizeBoxHeight20,
               ),
               CustomDropdown.search(
                 hintText: 'Electricity/Water charges to be paid by',
@@ -173,20 +170,29 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
                 height: MySize.kSizeBoxHeight20,
               ),
               Center(
-                  child: ElevatedButtonWidget(
-                height: 50,
-                width: 200,
-                title: 'Next',
-                onPressed: () {
-                  print(paymentModeListCtrl.text);
-                  Navigator.push(
-                    context,
-                    RightToLeftRoute(
-                      page: const PaymentPage(),
-                    ),
-                  );
-                },
-              )),
+                  child: SizedBox(
+                    height: MySize.kScreenHeight *
+                        0.052, // 52 / 360 = 0.1444
+                    width: MySize.kScreenWidth, // 324 / 800 = 0.405,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0XFF0f172a),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            )),
+                        onPressed: () {
+                          print(paymentModeListCtrl.text);
+                          Navigator.push(
+                            context,
+                            RightToLeftRoute(
+                              page: const PaymentPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Continue',
+                          style: TextStyle(fontSize: MySize.kHeading2),
+                        )),)),
               SizedBox(
                 height: MySize.kSizeBoxHeight20,
               ),

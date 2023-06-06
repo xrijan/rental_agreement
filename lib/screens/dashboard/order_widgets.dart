@@ -24,96 +24,99 @@ class _OrderWidgetState extends State<OrderWidget> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: MySize.kScreenHeight/6 * orderModel.length,
-      child: ListView.builder(
-          itemCount: orderModel.length,
-          itemBuilder: (BuildContext context,index){
-            return  InkWell(
-              onTap: (){
-                Navigator.push(
-                  context,
-                  RightToLeftRoute(
-                    page:  OrderDetailsPage(phoneNumber: '+91 9840030234', orderId: orderModel[index].orderId, productName: orderModel[index].productName, productPrice: orderModel[index].productPrice, productImage: orderModel[index].productImage, orderDate: orderModel[index].productConfirmedDate, deliveryDate: orderModel[index].productDeliveryDate,),
-                  ),
-                );
-              },
-              child: Container(
-                height: MySize.kScreenHeight/8,
-                width: double.infinity,
-                padding: const EdgeInsets.all(8),
-                margin: const EdgeInsets.symmetric(vertical: 5),
-                decoration: BoxDecoration(
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.circular(10),
-                    border:Border.all(
-                        color: Colors.grey.shade200, width: 2)
-
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(orderModel[index].productImage),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Delivered on ${orderModel[index].productDeliveryDate}'),
-                        Text(orderModel[index].productName),
-                        RatingBar.builder(
-                          initialRating: 0,
-                          direction:  Axis.horizontal,
-                          itemCount: 5,
-                          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, index) {
-                            switch (index) {
-                              case 0:
-                                return const Icon(
-                                  Icons.sentiment_very_dissatisfied,
-                                  color: Colors.red,
-                                );
-                              case 1:
-                                return const Icon(
-                                  Icons.sentiment_dissatisfied,
-                                  color: Colors.redAccent,
-                                );
-                              case 2:
-                                return const Icon(
-                                  Icons.sentiment_neutral,
-                                  color: Colors.amber,
-                                );
-                              case 3:
-                                return const Icon(
-                                  Icons.sentiment_satisfied,
-                                  color: Colors.lightGreen,
-                                );
-                              case 4:
-                                return const Icon(
-                                  Icons.sentiment_very_satisfied,
-                                  color: Colors.green,
-                                );
-                              default:
-                                return Container();
-                            }
-                          },
-                          onRatingUpdate: (rating) {
-                            setState(() {
-
-                            });
-                          },
-                          updateOnDrag: true,
-                        ),
-                        Text(
-                          'Rating: ${orderModel[index].rating}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
+    return Padding(
+      padding: const EdgeInsets.only(right: 10,left: 10),
+      child: SizedBox(
+          height: MySize.kScreenHeight,
+        child: ListView.builder(
+            itemCount: orderModel.length,
+            itemBuilder: (BuildContext context,index){
+              return  InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    RightToLeftRoute(
+                      page:  OrderDetailsPage(phoneNumber: '+91 9840030234', orderId: orderModel[index].orderId, productName: orderModel[index].productName, productPrice: orderModel[index].productPrice, productImage: orderModel[index].productImage, orderDate: orderModel[index].productConfirmedDate, deliveryDate: orderModel[index].productDeliveryDate,),
                     ),
-                  ],
+                  );
+                },
+                child: Container(
+                  height: MySize.kScreenHeight/8,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(8),
+                  margin: const EdgeInsets.symmetric(vertical: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.white54,
+                      borderRadius: BorderRadius.circular(10),
+                      border:Border.all(
+                          color: Colors.grey.shade200, width: 2)
+
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(orderModel[index].productImage),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Delivered on ${orderModel[index].productDeliveryDate}'),
+                          Text(orderModel[index].productName),
+                          RatingBar.builder(
+                            initialRating: 0,
+                            direction:  Axis.horizontal,
+                            itemCount: 5,
+                            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            itemBuilder: (context, index) {
+                              switch (index) {
+                                case 0:
+                                  return const Icon(
+                                    Icons.sentiment_very_dissatisfied,
+                                    color: Colors.red,
+                                  );
+                                case 1:
+                                  return const Icon(
+                                    Icons.sentiment_dissatisfied,
+                                    color: Colors.redAccent,
+                                  );
+                                case 2:
+                                  return const Icon(
+                                    Icons.sentiment_neutral,
+                                    color: Colors.amber,
+                                  );
+                                case 3:
+                                  return const Icon(
+                                    Icons.sentiment_satisfied,
+                                    color: Colors.lightGreen,
+                                  );
+                                case 4:
+                                  return const Icon(
+                                    Icons.sentiment_very_satisfied,
+                                    color: Colors.green,
+                                  );
+                                default:
+                                  return Container();
+                              }
+                            },
+                            onRatingUpdate: (rating) {
+                              setState(() {
+
+                              });
+                            },
+                            updateOnDrag: true,
+                          ),
+                          Text(
+                            'Rating: ${orderModel[index].rating}',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

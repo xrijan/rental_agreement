@@ -23,55 +23,74 @@ class _UploadPageState extends State<UploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(title: 'Upload', onPressed: () { Navigator.pop(context); },),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
-        child: Column(
-          children:  [
-            const AttachFilesWidgets(),
-            const TextFormFieldWidgets(
-                label: 'New Rent Amount',
-                validateMsg: 'Please Enter the rent amount'),
-            SizedBox(height: MySize.kSizeBoxHeight20,
-              width: double.infinity,
-            ),
-            InkWell(
-              onTap: () async {
-                final DateTime? dateTime = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(3000));
-
-                if(dateTime != null){
-                  setState(() {
-                    newDate = '${dateTime.year}/${dateTime.month}/${dateTime.day}';
-                  });
-                }
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
-                height: 50,
+      body: SingleChildScrollView(
+         physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 10),
+          child: Column(
+            children:  [
+              const AttachFilesWidgets(),
+              const TextFormFieldWidgets(
+                  label: 'New Rent Amount',
+                  validateMsg: 'Please Enter the rent amount'),
+              SizedBox(height: MySize.kSizeBoxHeight20,
                 width: double.infinity,
-                decoration:  BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(6),
-                  ),
-                ),
-                child:  Text(newDate),
               ),
-            ),
-            const TextFormFieldWidgets(
-                label: 'Delivery Address',
-                validateMsg: 'Please Enter Delivery Address'),
-            const TextFormFieldWidgets(
-                label: 'Phone Number',
-                validateMsg: 'Please Enter Phone Number'),
-            SizedBox(height: MySize.kSizeBoxHeight20,
-              width: double.infinity,
-            ),
-            ElevatedButtonWidget(height: 50, width: MySize.kScreenWidth/2, title: 'Upload', onPressed: () {  },)
-          ],
+              InkWell(
+                onTap: () async {
+                  final DateTime? dateTime = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(3000));
+
+                  if(dateTime != null){
+                    setState(() {
+                      newDate = '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                    });
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                  height: 50,
+                  width: double.infinity,
+                  decoration:  BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(6),
+                    ),
+                  ),
+                  child:  Text(newDate),
+                ),
+              ),
+              const TextFormFieldWidgets(
+                  label: 'Delivery Address',
+                  validateMsg: 'Please Enter Delivery Address'),
+              const TextFormFieldWidgets(
+                  label: 'Phone Number',
+                  validateMsg: 'Please Enter Phone Number'),
+              SizedBox(height: MySize.kSizeBoxHeight20,
+                width: double.infinity,
+              ),
+              Center(
+                  child: SizedBox(
+                    height: 50, // 52 / 360 = 0.1444
+                     width: MySize.kScreenWidth, // 324 / 800 = 0.405,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0XFF0f172a),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            )),
+                        onPressed: () {
+
+                        },
+                        child: Text(
+                          'Upload',
+                          style: TextStyle(fontSize: MySize.kHeading2),
+                        )),)),
+            ],
+          ),
         ),
       ),
     );
