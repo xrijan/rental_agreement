@@ -43,7 +43,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Scaffold(
       backgroundColor: Color(0XFF0f172a),
       appBar: AppBar(
-         title: const Text('Dashboard'),
+         title: const Align(
+           alignment: Alignment.topLeft,
+             child: Text('Dashboard')),
+        automaticallyImplyLeading: false, // Le
         elevation: 0,
         backgroundColor: Color(0XFF0f172a),
       ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_agreement/model/drope_down_list_model.dart';
+import 'package:rental_agreement/model/property_details_model.dart';
+import 'package:rental_agreement/model/tenant_details_model.dart';
+import 'package:rental_agreement/provider/tenent_details_page_provider.dart';
 import 'package:rental_agreement/widgets/text_form_field_widgets.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import '../constants/right_to_left_screen.dart';
@@ -8,7 +11,9 @@ import '../constants/size.dart';
 import '../model/owner_details_model.dart';
 import '../model/user_type.dart';
 import '../provider/details_page_provider.dart';
+import '../provider/property_page_provider.dart';
 import '../screens/home/utilities_page.dart';
+import '../utilities.dart';
 
 class DetailsPageWidget extends StatefulWidget {
   late int current;
@@ -135,85 +140,109 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
   ///owner page
   Widget _buildOwnerWidget() {
     final ownerDetailsProvider = Provider.of<OwnerDetailsProvider>(context);
-    final ownerDetails = ownerDetailsProvider.ownerDetailsModel;
-    return Form(
-      key: _ownerFormKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Please fill the Owner details",
-            style: TextStyle(fontSize: MySize.kHeading2),
-          ),
-           TextFormFieldWidgets(
-            label: 'Name',
-            validateMsg: 'Please Enter Your Name', textEditingController: ownerNameCtrl,
-          ),
-           TextFormFieldWidgets(
-            label: 'Address line 1',
-            validateMsg: 'Please Enter Your Address', textEditingController: ownerAddress1Ctrl,
-          ),
-           TextFormFieldWidgets(
-            label: 'Address line 2',
-            validateMsg: 'Please Enter Your Address', textEditingController: ownerAddress2Ctrl,
-          ),
-           TextFormFieldWidgets(
-            label: 'Pin Code',
-            validateMsg: 'Please Enter PinCode', textEditingController: ownerPinCodeCtrl,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: CustomDropdown.search(
-              hintText: 'City',
-              items: dropDownList.cityList,
-              controller: ownerCityDropdownCtrl,
-              borderSide: const BorderSide(color: Colors.grey),
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
-            ),
-          ),
-          CustomDropdown.search(
-            hintText: 'State',
-            items: dropDownList.stateList,
-            controller: ownerStateDropdownCtrl,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Please fill the Owner details",
+          style: TextStyle(fontSize: MySize.kHeading2),
+        ),
+        TextFormFieldWidgets(
+          label: 'Name',
+          validateMsg: 'Please Enter Your Name',
+          textEditingController: ownerNameCtrl,
+        ),
+        TextFormFieldWidgets(
+          label: 'Address line 1',
+          validateMsg: 'Please Enter Your Address',
+          textEditingController: ownerAddress1Ctrl,
+        ),
+        TextFormFieldWidgets(
+          label: 'Address line 2',
+          validateMsg: 'Please Enter Your Address',
+          textEditingController: ownerAddress2Ctrl,
+        ),
+        TextFormFieldWidgets(
+          label: 'Pin Code',
+          validateMsg: 'Please Enter PinCode',
+          textEditingController: ownerPinCodeCtrl,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: CustomDropdown.search(
+            hintText: 'City',
+            items: dropDownList.cityList,
+            controller: ownerCityDropdownCtrl,
             borderSide: const BorderSide(color: Colors.grey),
             borderRadius: const BorderRadius.all(Radius.circular(4)),
           ),
-          TextFormFieldWidgets(
-            label: 'PAN no. (optional)',
-            validateMsg: 'Please Enter PinCode', textEditingController: ownerPANCtrl,
-          ),
-          Center(
-            child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0XFF0f172a),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      )),
-                  onPressed: () {
-                    final newOwnerDetailsModel = OwnerDetailsModel(
-                        ownerName: 'Rijan',
-                        ownerAddress1: 'Bardibas',
-                        ownerAddress2: 'Patu',
-                        pinCode: '562106',
-                        city: 'Mahottari',
-                        state: 'Mithili',
-                        pan: '4234jnjdn');
-                    ownerDetailsProvider
-                        .updateOwnerDetails(newOwnerDetailsModel);
+        ),
+        CustomDropdown.search(
+          hintText: 'State',
+          items: dropDownList.stateList,
+          controller: ownerStateDropdownCtrl,
+          borderSide: const BorderSide(color: Colors.grey),
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
+        ),
+        TextFormFieldWidgets(
+          label: 'PAN no. (optional)',
+          validateMsg: 'Please Enter PinCode',
+          textEditingController: ownerPANCtrl,
+        ),
+        SizedBox(height: 50,),
+        Center(
+          child: SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0XFF0f172a),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    )),
+                onPressed: () {
+                  if (ownerNameCtrl.text.isEmpty &&
+                      ownerAddress1Ctrl.text.isEmpty &&
+                      ownerAddress2Ctrl.text.isEmpty &&
+                      ownerPinCodeCtrl.text.isEmpty &&
+                      ownerCityDropdownCtrl.text.isEmpty &&
+                      ownerStateDropdownCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(
+                        context, 'some of the field are missing');
+                  } else if (ownerNameCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'name is missing');
+                  } else if (ownerAddress1Ctrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'address is missing');
+                  } else if (ownerAddress2Ctrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'address is missing');
+                  } else if (ownerPinCodeCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'pin code is missing');
+                  } else if (ownerCityDropdownCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'city is missing');
+                  } else if (ownerStateDropdownCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'state is missing');
+                  } else {
                     setState(() {
                       if (widget.current < 2) {
                         widget.current++;
                       }
                     });
-                  },
-                  child: const Text('Next')),
-            ),
+                    final newOwnerDetailsModel = OwnerDetailsModel(
+                        ownerName: ownerNameCtrl.text,
+                        ownerAddress1: ownerAddress1Ctrl.text,
+                        ownerAddress2: ownerAddress2Ctrl.text,
+                        pinCode: ownerPinCodeCtrl.text,
+                        city: ownerCityDropdownCtrl.text,
+                        state: ownerStateDropdownCtrl.text,
+                        pan: '4234jnjdn');
+                    ownerDetailsProvider
+                        .updateOwnerDetails(newOwnerDetailsModel);
+                  }
+                },
+                child: const Text('Next')),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -221,212 +250,256 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
   Widget _buildTenantWidget() {
     final ownerDetailsProvider = Provider.of<OwnerDetailsProvider>(context);
     final ownerDetails = ownerDetailsProvider.ownerDetailsModel;
-    return Form(
-      key: _tenentFormKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(ownerDetails.ownerName),
-          Text(ownerDetails.ownerAddress1),
-          Text(ownerDetails.ownerAddress2),
-          Text(ownerDetails.pinCode),
-          Text(ownerDetails.city),
-          Text(ownerDetails.state),
-          Text(ownerDetails.pan),
-          Text(
-            "Please fill the Tenant details",
-            style: TextStyle(fontSize: MySize.kHeading2),
-          ),
-          SizedBox(
-            height: MySize.kSizeBoxHeight20,
-          ),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: MySize.kTextFieldHeight,
-                      child: TextField(
-                        decoration: const InputDecoration(
-                          labelText: 'Name',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              bottomLeft: Radius.circular(5),
-                            ),
-                          ),
-                        ),
-                        onChanged: (value) {
-                          // do nothing
-                        },
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 55,
-                    width: 55,
-                    decoration: const BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
-                    ),
-                    child: IconButton(
-                      onPressed: _addName,
-                      icon: const Icon(Icons.add),
-                    ),
-                  ),
-                ],
-              ),
-              ..._names.asMap().entries.map((entry) {
-                final index = entry.key;
-                final name = entry.value;
-                final isLast = index == _names.length;
-                return Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: MySize.kTextFieldHeight,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              labelText: isLast ? 'Name' : 'Name ${index + 1}',
-                              border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                ),
-                              ),
-                            ),
-                            initialValue: name,
-                            onChanged: (value) {
-                              setState(() {
-                                _names[index] = value;
-                              });
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Name is required';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: MySize.kTextFieldHeight,
-                        width: MySize.kTextFieldHeight,
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
-                          ),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _names.removeAt(index);
-                            });
-                          },
-                          icon: const Icon(Icons.delete),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ],
-          ),
-           TextFormFieldWidgets(
-            label: 'Address line 1',
-            validateMsg: 'Please Enter Your Address', textEditingController: tenantAddress1Ctrl,
-          ),
-           TextFormFieldWidgets(
-            label: 'Address line 2',
-            validateMsg: 'Please Enter Your Address', textEditingController: tenantAddress2Ctrl,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
+
+    final tenantDetailsProvider = Provider.of<TenantDetailsProvider>(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(ownerDetails.ownerName),
+        Text(ownerDetails.ownerAddress1),
+        Text(ownerDetails.ownerAddress2),
+        Text(ownerDetails.pinCode),
+        Text(ownerDetails.city),
+        Text(ownerDetails.state),
+        Text(ownerDetails.pan),
+        Text(
+          "Please fill the Tenant details",
+          style: TextStyle(fontSize: MySize.kHeading2),
+        ),
+        SizedBox(
+          height: MySize.kSizeBoxHeight20,
+        ),
+        Column(
+          children: [
+            Row(
               children: [
                 Expanded(
-                  child: CustomDropdown.search(
-                    hintText: 'City',
-                    items: dropDownList.cityList,
-                    controller: tenantCityDropdownCtrl,
-                    borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  child: SizedBox(
+                    height: MySize.kTextFieldHeight,
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        // do nothing
+                      },
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                SizedBox(
-                  width: 120,
-                  height: MySize.kTextFieldHeight,
-                  child: const TextField(
-                    decoration: InputDecoration(
-                        labelText: 'PIN', border: OutlineInputBorder()),
+                Container(
+                  height: 55,
+                  width: 55,
+                  decoration: const BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
                   ),
-                )
+                  child: IconButton(
+                    onPressed: _addName,
+                    icon: const Icon(Icons.add),
+                  ),
+                ),
               ],
             ),
+            ..._names.asMap().entries.map((entry) {
+              final index = entry.key;
+              final name = entry.value;
+              final isLast = index == _names.length;
+              return Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: MySize.kTextFieldHeight,
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: isLast ? 'Name' : 'Name ${index + 1}',
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                              ),
+                            ),
+                          ),
+                          initialValue: name,
+                          onChanged: (value) {
+                            setState(() {
+                              _names[index] = value;
+                            });
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Name is required';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: MySize.kTextFieldHeight,
+                      width: MySize.kTextFieldHeight,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _names.removeAt(index);
+                          });
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ],
+        ),
+        TextFormFieldWidgets(
+          label: 'Address line 1',
+          validateMsg: 'Please Enter Your Address',
+          textEditingController: tenantAddress1Ctrl,
+        ),
+        TextFormFieldWidgets(
+          label: 'Address line 2',
+          validateMsg: 'Please Enter Your Address',
+          textEditingController: tenantAddress2Ctrl,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            children: [
+              Expanded(
+                child: CustomDropdown.search(
+                  hintText: 'City',
+                  items: dropDownList.cityList,
+                  controller: tenantCityDropdownCtrl,
+                  borderSide: const BorderSide(color: Colors.grey),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              SizedBox(
+                width: 120,
+                height: 48,
+                child: TextField(
+                  controller: tenantPinCodeCtrl,
+                  decoration: const InputDecoration(
+                      labelText: 'PIN', border: OutlineInputBorder()),
+                ),
+              )
+            ],
           ),
-          CustomDropdown.search(
-            hintText: 'State',
-            items: dropDownList.stateList,
-            controller: tenantStateDropdownCtrl,
+        ),
+        CustomDropdown.search(
+          hintText: 'State',
+          items: dropDownList.stateList,
+          controller: tenantStateDropdownCtrl,
+          borderSide: const BorderSide(color: Colors.grey),
+          borderRadius: const BorderRadius.all(Radius.circular(4)),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: CustomDropdown.search(
+            hintText: 'Select ID proof',
+            items: dropDownList.idList,
+            controller: tenantIdDropdownCtrl,
             borderSide: const BorderSide(color: Colors.grey),
             borderRadius: const BorderRadius.all(Radius.circular(4)),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: CustomDropdown.search(
-              hintText: 'Select ID proof',
-              items: dropDownList.idList,
-              controller: tenantIdDropdownCtrl,
-              borderSide: const BorderSide(color: Colors.grey),
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
-            ),
-          ),
-           TextFormFieldWidgets(
-            label: 'ID NO.',
-            validateMsg: 'Please enter your id number  Tenant 1', textEditingController: tenantIdNoCtrl,
-          ),
-          SizedBox(
-            height: MySize.kSizeBoxHeight20,
-          ),
-          Center(
-            child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0XFF0f172a),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      )),
-                  onPressed: () {
+        ),
+        TextFormFieldWidgets(
+          label: 'ID NO.',
+          validateMsg: 'Please enter your id number  Tenant 1',
+          textEditingController: tenantIdNoCtrl,
+        ),
+        SizedBox(
+          height: MySize.kSizeBoxHeight20,
+        ),
+        Center(
+          child: SizedBox(
+            height: 50,
+            width: double.infinity,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0XFF0f172a),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    )),
+                onPressed: () {
+                  if (_names.isEmpty &&
+                      tenantAddress1Ctrl.text.isEmpty &&
+                      tenantAddress2Ctrl.text.isEmpty &&
+                      tenantPinCodeCtrl.text.isEmpty &&
+                      tenantCityDropdownCtrl.text.isEmpty &&
+                      ownerStateDropdownCtrl.text.isEmpty &&
+                      tenantIdDropdownCtrl.text.isEmpty &&
+                      tenantIdNoCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(
+                        context, 'some of the field are missing');
+                  } else if (_names.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'name is missing');
+                  } else if (tenantAddress1Ctrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'address is missing');
+                  } else if (tenantAddress2Ctrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'address is missing');
+                  } else if (tenantPinCodeCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'pin code is missing');
+                  } else if (tenantCityDropdownCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'city is missing');
+                  } else if (tenantStateDropdownCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'state is missing');
+                  } else if (tenantIdDropdownCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'id is missing');
+                  } else if (tenantIdNoCtrl.text.isEmpty) {
+                    SnackBarUtil.showSnackBar(context, 'id is missing');
+                  } else {
+                    final newTenantDetailsModel = TenantDetailsModel(
+                        tenantName: _names,
+                        tenantAddress1: tenantAddress1Ctrl.text,
+                        tenantAddress2: tenantAddress2Ctrl.text,
+                        tenantCity: tenantCityDropdownCtrl.text,
+                        tenantPIN: tenantPinCodeCtrl.text,
+                        tenantState: tenantStateDropdownCtrl.text,
+                        tenantID: tenantIdDropdownCtrl.text,
+                        tenantIDNo: tenantIdNoCtrl.text);
+                    tenantDetailsProvider
+                        .updateTenantDetails(newTenantDetailsModel);
                     setState(() {
                       if (widget.current < 2) {
                         widget.current++;
                       }
                     });
-                  },
-                  child: const Text('Next')),
-            ),
+                  }
+                },
+                child: const Text('Next')),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   ///property page
   Widget _buildPropertyWidget() {
+    final propertyDetailsProvider =
+        Provider.of<PropertyDetailsProvider>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -491,12 +564,18 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
             children: [
               SizedBox(
                   width: MySize.kScreenWidth / 2.4,
-                  child:  TextFormFieldWidgets(
-                      label: 'Rent Amount', validateMsg: 'Rental Start Date', textEditingController: propertyRentAmountCtrl,)),
+                  child: TextFormFieldWidgets(
+                    label: 'Rent Amount',
+                    validateMsg: 'Rental Start Date',
+                    textEditingController: propertyRentAmountCtrl,
+                  )),
               SizedBox(
                   width: MySize.kScreenWidth / 2.4,
-                  child:  TextFormFieldWidgets(
-                      label: 'Rent Deposit', validateMsg: 'Rental Start Date', textEditingController: propertyRentDepositCtrl,)),
+                  child: TextFormFieldWidgets(
+                    label: 'Rent Deposit',
+                    validateMsg: 'Rental Start Date',
+                    textEditingController: propertyRentDepositCtrl,
+                  )),
             ],
           ),
           Padding(
@@ -564,13 +643,15 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
               ],
             ),
           ),
-           TextFormFieldWidgets(
+          TextFormFieldWidgets(
             label: 'Address line 1',
-            validateMsg: 'Please Enter Your Address', textEditingController: propertyAddress1Ctrl,
+            validateMsg: 'Please Enter Your Address',
+            textEditingController: propertyAddress1Ctrl,
           ),
-         TextFormFieldWidgets(
+          TextFormFieldWidgets(
             label: 'Address line 2',
-            validateMsg: 'Please Enter Your Address', textEditingController: propertyAddress2Ctrl,
+            validateMsg: 'Please Enter Your Address',
+            textEditingController: propertyAddress2Ctrl,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
@@ -620,6 +701,14 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
                       borderRadius: BorderRadius.circular(8),
                     )),
                 onPressed: () {
+                  final newPropertyDetailsModel = PropertyDetailsModel(
+                      rentalStartDate: newRentalDate,
+                      rentalAmount: propertyRentAmountCtrl.text,
+                      rentalDeposit: propertyRentDepositCtrl.text,
+                      residence: propertyResidenceTypeDropdownCtrl.text,
+                      rentalAddressSameAs: UserTypeRadio.values.toString());
+                  propertyDetailsProvider
+                      .updatePropertyDetails(newPropertyDetailsModel);
                   Navigator.push(
                     context,
                     RightToLeftRoute(

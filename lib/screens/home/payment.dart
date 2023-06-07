@@ -46,6 +46,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   void dispose() {
+    super.dispose();
     eStampCtrl.dispose();
     modeDeliveryCtrl.dispose();
   }
