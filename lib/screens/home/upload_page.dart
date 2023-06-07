@@ -2,7 +2,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rental_agreement/widgets/app_bar_widget.dart';
-import 'package:rental_agreement/widgets/elevated_button_widget.dart';
 import '../../constants/size.dart';
 import '../../widgets/text_form_field_widgets.dart';
 
@@ -18,6 +17,10 @@ class _UploadPageState extends State<UploadPage> {
    String newDate = 'Select Rental Date';
    DateTime selectDate = DateTime.now();
 
+   final uploadRentAmountCtrl = TextEditingController();
+   final uploadDeliveryAddressCtrl = TextEditingController();
+   final uploadPhoneNumberCtrl = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,9 @@ class _UploadPageState extends State<UploadPage> {
           child: Column(
             children:  [
               const AttachFilesWidgets(),
-              const TextFormFieldWidgets(
+               TextFormFieldWidgets(
                   label: 'New Rent Amount',
-                  validateMsg: 'Please Enter the rent amount'),
+                  validateMsg: 'Please Enter the rent amount', textEditingController: uploadRentAmountCtrl,),
               SizedBox(height: MySize.kSizeBoxHeight20,
                 width: double.infinity,
               ),
@@ -63,12 +66,12 @@ class _UploadPageState extends State<UploadPage> {
                   child:  Text(newDate),
                 ),
               ),
-              const TextFormFieldWidgets(
+               TextFormFieldWidgets(
                   label: 'Delivery Address',
-                  validateMsg: 'Please Enter Delivery Address'),
-              const TextFormFieldWidgets(
+                  validateMsg: 'Please Enter Delivery Address', textEditingController: uploadDeliveryAddressCtrl,),
+               TextFormFieldWidgets(
                   label: 'Phone Number',
-                  validateMsg: 'Please Enter Phone Number'),
+                  validateMsg: 'Please Enter Phone Number', textEditingController: uploadPhoneNumberCtrl,),
               SizedBox(height: MySize.kSizeBoxHeight20,
                 width: double.infinity,
               ),

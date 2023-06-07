@@ -16,6 +16,8 @@ class HelpCenterWidget extends StatefulWidget {
 
 class _HelpCenterWidgetState extends State<HelpCenterWidget> {
   String _dropdownValue = "Address";
+  final nameCtrl = TextEditingController();
+  final emailCtrl =  TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -88,10 +90,10 @@ class _HelpCenterWidgetState extends State<HelpCenterWidget> {
               ),
             ],
           ),
-          const TextFormFieldWidgets(
-              label: 'Name', validateMsg: 'Name is required'),
-          const TextFormFieldWidgets(
-              label: 'Email', validateMsg: 'Email is required'),
+           TextFormFieldWidgets(
+              label: 'Name', validateMsg: 'Name is required', textEditingController: nameCtrl,),
+           TextFormFieldWidgets(
+              label: 'Email', validateMsg: 'Email is required', textEditingController: emailCtrl,),
           SizedBox(
             height: MySize.kSizeBoxHeight20,
           ),

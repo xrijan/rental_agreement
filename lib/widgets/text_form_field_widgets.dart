@@ -7,9 +7,10 @@ import '../constants/size.dart';
 class TextFormFieldWidgets extends StatefulWidget {
   final String label;
   final String validateMsg;
+  final TextEditingController textEditingController;
   final void Function(String?)? onSaved;
   const TextFormFieldWidgets(
-      {Key? key, required this.label, required this.validateMsg, this.onSaved})
+      {Key? key, required this.label, required this.validateMsg, this.onSaved, required this.textEditingController})
       : super(key: key);
   @override
   State<TextFormFieldWidgets> createState() => _TextFormFieldWidgetsState();
@@ -22,8 +23,9 @@ class _TextFormFieldWidgetsState extends State<TextFormFieldWidgets> {
       padding: const EdgeInsets.only(top: 20),
       child: SizedBox(
         height: MySize.kTextFieldHeight,
-        child: TextFormField(
+        child: TextField(
           cursorColor: MyColors.kSecondaryTextColor,
+          controller: widget.textEditingController,
           decoration: InputDecoration(
             labelText: widget.label,
             labelStyle: const TextStyle(
@@ -43,13 +45,6 @@ class _TextFormFieldWidgetsState extends State<TextFormFieldWidgets> {
               ),
             ),
           ),
-          validator: (value) {
-            if (value!.isEmpty) {
-              return widget.validateMsg;
-            }
-            return null;
-          },
-          onSaved: widget.onSaved,
         ),
       ),
     );

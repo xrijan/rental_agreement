@@ -9,6 +9,7 @@ import 'package:rental_agreement/widgets/elevated_button_widget.dart';
 
 import '../../constants/right_to_left_screen.dart';
 import '../../constants/size.dart';
+import '../../model/user_type.dart';
 import '../../widgets/text_form_field_widgets.dart';
 
 class UtilitiesPage extends StatefulWidget {
@@ -53,6 +54,11 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
   final minimumNoticeListCtrl = TextEditingController();
   final rentalIncrementListCtrl = TextEditingController();
   final paymentModeListCtrl = TextEditingController();
+  final additionalUtilitiesCtrl = TextEditingController();
+  final rentPaymentDateCtrl = TextEditingController();
+  final anyOthersClausesCtrl = TextEditingController();
+  final monthlyMaintenanceAmountCtrl = TextEditingController();
+
 
   @override
   void dispose() {
@@ -88,9 +94,9 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Add Utilities and Clauses'),
-              const TextFormFieldWidgets(
+               TextFormFieldWidgets(
                   label: 'Utilities',
-                  validateMsg: 'Please enter additional utilities'),
+                  validateMsg: 'Please enter additional utilities', textEditingController: additionalUtilitiesCtrl,),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -101,10 +107,10 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
                     );
                   },
                   child: const Text("Click here to view default utilities")),
-              const TextFormFieldWidgets(
+               TextFormFieldWidgets(
                   label: 'Rent payment date',
                   validateMsg:
-                      'Please enter the rent payable date(every month)'),
+                      'Please enter the rent payable date(every month)', textEditingController: rentPaymentDateCtrl,),
               SizedBox(
                 height: MySize.kSizeBoxHeight20,
               ),
@@ -135,9 +141,9 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
                 borderSide: const BorderSide(color: Colors.grey),
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
               ),
-              const TextFormFieldWidgets(
+               TextFormFieldWidgets(
                   label: 'Any other clauses?(optional)',
-                  validateMsg: 'text format'),
+                  validateMsg: 'text format', textEditingController: anyOthersClausesCtrl,),
               SizedBox(
                 height: MySize.kSizeBoxHeight20,
               ),
@@ -149,9 +155,9 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
               ),
               _buildIdBox(),
-              const TextFormFieldWidgets(
-                  label: 'Monthly maintainence amount to be paid by',
-                  validateMsg: 'please enter'),
+               TextFormFieldWidgets(
+                  label: 'Monthly maintenance amount to be paid by',
+                  validateMsg: 'please enter', textEditingController: anyOthersClausesCtrl,),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: CustomDropdown.search(
@@ -231,6 +237,9 @@ class _DeliveryAddressWidgetState extends State<DeliveryAddressWidget> {
     super.dispose();
   }
 
+  final utilitiesAddress1Ctrl = TextEditingController();
+  final utilitiesAddress2Ctrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -287,13 +296,13 @@ class _DeliveryAddressWidgetState extends State<DeliveryAddressWidget> {
             ],
           ),
         ),
-        const TextFormFieldWidgets(
+        TextFormFieldWidgets(
           label: 'Address line 1',
-          validateMsg: 'Please Enter Your Address',
+          validateMsg: 'Please Enter Your Address', textEditingController: utilitiesAddress1Ctrl,
         ),
-        const TextFormFieldWidgets(
+         TextFormFieldWidgets(
           label: 'Address line 2',
-          validateMsg: 'Please Enter Your Address',
+          validateMsg: 'Please Enter Your Address', textEditingController: utilitiesAddress2Ctrl,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -334,4 +343,4 @@ class _DeliveryAddressWidgetState extends State<DeliveryAddressWidget> {
   }
 }
 
-enum UserTypeRadio { owner, tenant, other }
+
