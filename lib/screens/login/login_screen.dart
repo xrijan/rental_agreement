@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rental_agreement/constants/size.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:rental_agreement/screens/login/verification_screen.dart';
+import 'package:rental_agreement/utilities.dart';
+
+import '../../constants/right_to_left_screen.dart';
 
 
 class LogInScreen extends StatefulWidget {
@@ -76,8 +80,8 @@ class _LogInScreenState extends State<LogInScreen> {
                       'Phone Number',
                       style: TextStyle(fontSize: MySize.kHeading2),
                     ),
-                    SizedBox(
-                      height: MySize.kSizeBoxHeight10,
+                    const SizedBox(
+                      height: 10,
                       width: double.infinity,
                     ),
                     Container(
@@ -146,30 +150,36 @@ class _LogInScreenState extends State<LogInScreen> {
                       ),
                     ),
                     const Spacer(),
-                    Center(
-                        child: SizedBox(
-                            height: MySize.kScreenHeight *
-                                0.052, // 52 / 360 = 0.1444
-                            width: MySize.kScreenWidth, // 324 / 800 = 0.405,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0XFF0f172a),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    )),
-                                onPressed: () {
-                                       Navigator.pushNamed(context, '/');
-                                },
-                                child: Text(
-                                  'Continue',
-                                  style: TextStyle(fontSize: MySize.kHeading2),
-                                )),)),
+                    SizedBox(
+                      height: 45,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0XFF0f172a),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              )),
+                          onPressed: () {
+                            if(phoneNumberCtrl.text.isEmpty) {
+                              SnackBarUtil.showSnackBar(context, 'Phone number missing ');
+                            } else {
+                              Navigator.push(
+                                context,
+                                RightToLeftRoute(
+                                  page: Verification(phoneNumber: phoneNumberCtrl.text,),
+                                ),
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(fontSize: MySize.kHeading2),
+                          )),
+                    ),
                     const SizedBox(height: 10,),
-                    Center(
-                      child: Text(
-                        'By Continuing you will agree our all terms and condition',
-                        style: TextStyle(fontSize: MySize.kHeading3,color: Colors.black54),
-                      ),
+                    Text(
+                      'By Continuing you will agree our all terms and condition',
+                      style: TextStyle(fontSize: MySize.kHeading3,color: Colors.black54),
                     ),
                     const SizedBox(height: 10,),
                   ],

@@ -18,13 +18,12 @@ class _StoriesPageState extends State<StoriesPage> {
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: Align(
+        title: const Align(
           alignment: Alignment.topLeft,
             child: Text('Stories')),
         backgroundColor: Color(0XFF0f172a),
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: Column(
           children: [
             Container(

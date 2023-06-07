@@ -2,6 +2,7 @@
 class OrderModel {
   String orderId = '';
   String productName = '';
+  String productDescription = '';
   String productImage = ' ';
   int productPrice = 0;
   String productConfirmedDate = '';
@@ -11,6 +12,7 @@ class OrderModel {
   OrderModel(
       {required this.orderId,
       required this.productName,
+        required this.productDescription,
       required this.productImage,
       required this.productPrice,
       required this.productConfirmedDate,

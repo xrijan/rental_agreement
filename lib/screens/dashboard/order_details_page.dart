@@ -10,7 +10,8 @@ class OrderDetailsPage extends StatefulWidget {
   final String productImage;
   final String orderDate;
   final String deliveryDate;
-  const OrderDetailsPage({Key? key, required this.phoneNumber, required this.orderId, required this.productName, required this.productPrice, required this.productImage, required this.orderDate, required this.deliveryDate}) : super(key: key);
+  final String productDescription;
+  const OrderDetailsPage({Key? key, required this.phoneNumber, required this.orderId, required this.productName, required this.productPrice, required this.productImage, required this.orderDate, required this.deliveryDate, required this.productDescription}) : super(key: key);
 
   @override
   State<OrderDetailsPage> createState() => _OrderDetailsPageState();
@@ -64,20 +65,26 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 color: Colors.grey,
               ),
               SizedBox(height: MySize.kSizeBoxHeight10,),
-              SizedBox(height: MySize.kScreenHeight/8,
+              SizedBox(height: 150,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Product Name : ${widget.productName}'),
-                        Text('Price : ₹ ${widget.productPrice}'),
-                      ],
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Product Name : ${widget.productName}'),
+                          Text(widget.productDescription),
+                          Text('Price : ₹ ${widget.productPrice}'),
+                        ],
+                      ),
                     ),
-                    Image.asset(widget.productImage),
+                    SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.asset(widget.productImage)),
                   ],
                 ),
               ),

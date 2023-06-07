@@ -110,14 +110,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             color: Colors.deepPurpleAccent, width: 2)
                             : null,
                       ),
-                      child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Documents and Lockers',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          )),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Documents and Lockers',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
                     ),
                   ),
                 ],

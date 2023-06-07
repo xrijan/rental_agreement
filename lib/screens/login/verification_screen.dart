@@ -6,7 +6,8 @@ import '../../constants/right_to_left_screen.dart';
 import '../../constants/size.dart';
 
 class Verification extends StatefulWidget {
-  const Verification({ Key? key }) : super(key: key);
+  final String phoneNumber;
+  const Verification({ Key? key, required this.phoneNumber }) : super(key: key);
 
   @override
   VerificationState createState() => VerificationState();
@@ -84,7 +85,9 @@ class VerificationState extends State<Verification> {
         backgroundColor: Color(0XFF0f172a),
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const ImageIcon(
               AssetImage('assets/icons/angle-left.png'),
               size: 30,
@@ -115,7 +118,7 @@ class VerificationState extends State<Verification> {
                       height: MySize.kSizeBoxHeight10,
                       width: double.infinity,
                     ),
-                    Text("Please enter the 4 digit code sent to \n +93 706-399-999",
+                    Text("Please enter the 4 digit code sent to \n ${widget.phoneNumber}",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, color: Colors.grey.shade500, height: 1.5),),
                     const SizedBox(height: 30,),
@@ -150,24 +153,30 @@ class VerificationState extends State<Verification> {
                     ),
                     const Spacer(),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Center(
-                          child: SizedBox(
-                            height: MySize.kScreenHeight * 0.052, // 52 / 360 = 0.1444
-                            width: MySize.kScreenWidth, // 324 / 800 = 0.405,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0XFF0f172a),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8),
-                                    )),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/main');
-                                },
-                                child: Text(
-                                  'Continue',
-                                  style: TextStyle(fontSize: MySize.kHeading2),
-                                )),)),
+                      padding: const EdgeInsets.all(40),
+                      child: SizedBox(
+                        height: 45,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0XFF0f172a),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                )),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                RightToLeftRoute(
+                                  page: const MainPage(),
+                                ),
+                              );
+                              Navigator.pushNamed(context, '/main');
+                            },
+                            child: Text(
+                              'Continue',
+                              style: TextStyle(fontSize: MySize.kHeading2),
+                            )),
+                      ),
                     ),
                     const SizedBox(height: 50,),
                   ],

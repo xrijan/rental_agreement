@@ -15,16 +15,14 @@ class CarouselSliderWidget extends StatefulWidget {
 class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
   List bannerList = [
     {
-      "image_path":
-      'https://cdn1.vectorstock.com/i/1000x1000/96/35/grand-offer-sale-and-discount-banner-template-vector-14299635.jpg'
+      "image_path": 'assets/banner1.jpg'
+    },
+    {
+      "image_path": 'assets/banner2.jpg',
     },
     {
       "image_path":
-      'https://static.vecteezy.com/system/resources/previews/002/453/533/non_2x/big-sale-discount-banner-template-promotion-illustration-free-vector.jpg'
-    },
-    {
-      "image_path":
-      'https://static.vecteezy.com/system/resources/previews/002/453/548/original/sale-discount-banner-template-promotion-illustration-free-vector.jpg'
+      'assets/banner3.jpg'
     }
   ];
   final CarouselController carouselController = CarouselController();
@@ -45,7 +43,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
                   padding: const EdgeInsets.only(right: 10),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
+                    child: Image.asset(
                       item['image_path'],
                       fit: BoxFit.cover,
                       width: double.infinity,

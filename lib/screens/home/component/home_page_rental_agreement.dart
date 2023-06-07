@@ -38,13 +38,6 @@ class _RentalAgreementState extends State<RentalAgreement> {
         SizedBox(
           height: MySize.kSizeBoxHeight10,
         ),
-        const Text(
-          'Rental Agreement',
-          style: TextStyle(fontSize: 24),
-        ),
-        SizedBox(
-          height: MySize.kSizeBoxHeight10,
-        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

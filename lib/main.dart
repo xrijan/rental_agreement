@@ -29,7 +29,6 @@ class RentalAgreementApp extends StatelessWidget {
         title: 'Rental Agreement',
         initialRoute: '/loginScreen',
         routes: {
-          '/': (context) => const Verification(),
           '/loginScreen': (context) => const LogInScreen(),
           '/main': (context) => const MainPage(),
         },

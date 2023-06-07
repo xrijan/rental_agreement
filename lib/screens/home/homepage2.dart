@@ -24,50 +24,61 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0XFF0f172a),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Color(0XFF0f172a),
+        automaticallyImplyLeading: false,
+        title: const Text(
+          'Rental Agreement',
+          style: TextStyle(fontSize: 18),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      RightToLeftRoute(
+                        page: const NotificationPage(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                  ),
+                  tooltip: 'Notifications',
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      RightToLeftRoute(
+                        page: const ProfilePage(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.account_circle,
+                    color: Colors.white,
+                  ),
+                  tooltip: 'Profile',
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: MySize.kSizeBoxHeight10,
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        RightToLeftRoute(
-                          page: const NotificationPage(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    ),
-                    tooltip: 'Notifications',
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        RightToLeftRoute(
-                          page: const ProfilePage(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.account_circle,
-                      color: Colors.white,
-                    ),
-                    tooltip: 'Profile',
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: MySize.kSizeBoxHeight10,
-            ),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -133,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                                             SizedBox(height: MySize.kSizeBoxHeight20),
                                             ...faqModel.faq.map(
                                                   (faq) => Container(
-                                                margin: EdgeInsets.only(bottom: 10),
+                                                margin: const EdgeInsets.only(bottom: 10),
                                                 child: ClipRRect(
                                                   borderRadius: BorderRadius.circular(10),
                                                   child: ExpansionTile(
