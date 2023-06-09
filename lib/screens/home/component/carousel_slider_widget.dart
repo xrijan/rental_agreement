@@ -34,7 +34,7 @@ class _CarouselSliderWidgetState extends State<CarouselSliderWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: SizedBox(
-            height: MySize.kScreenHeight * 0.10,
+            height: 80,
             width: double.infinity,
             child: CarouselSlider(
               items: bannerList

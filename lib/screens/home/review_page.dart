@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_agreement/screens/home/payment.dart';
 import 'package:rental_agreement/widgets/app_bar_widget.dart';
+import 'package:rental_agreement/widgets/text_form_field_widgets.dart';
 
 import '../../constants/right_to_left_screen.dart';
 import '../../constants/size.dart';
@@ -32,6 +33,26 @@ class _ReviewPageState extends State<ReviewPage> {
 
     final utilitiesDetailsProvider = Provider.of<UtilitiesProvider>(context);
     final utilitiesDetails = utilitiesDetailsProvider.utilitiesModel;
+
+    final ownerNameCtrl = TextEditingController();
+    ownerNameCtrl.text = ownerDetails.ownerName;
+
+    final ownerAddress1Ctrl = TextEditingController();
+    ownerAddress1Ctrl.text = ownerDetails.ownerAddress1;
+
+    final ownerAddress2Ctrl = TextEditingController();
+    ownerAddress2Ctrl.text = ownerDetails.ownerAddress2;
+
+    final ownerPinCodeCtrl = TextEditingController();
+    ownerPinCodeCtrl.text = ownerDetails.pinCode;
+    final ownerStateDropdownCtrl = TextEditingController();
+    ownerStateDropdownCtrl.text = ownerDetails.state;
+    final ownerCityDropdownCtrl = TextEditingController();
+    ownerCityDropdownCtrl.text = ownerDetails.city;
+    final ownerPANCtrl = TextEditingController();
+    ownerPANCtrl.text = ownerDetails.pan;
+
+
     return Scaffold(
       appBar: AppBarWidget(title: 'Review', onPressed: () {
         Navigator.pop(context);
@@ -44,22 +65,13 @@ class _ReviewPageState extends State<ReviewPage> {
             children: [
               Text('Owner Details',style: TextStyle(fontSize: MySize.kHeading1),),
               const SizedBox(height: 20,),
-              Container(
-                  color: Colors.black12,
-                  child: Text('Name: ${ownerDetails.ownerName}')),
-              const SizedBox(height: 10,),
-              Text('Address 1: ${ownerDetails.ownerAddress1}'),
-              const SizedBox(height: 10,),
-              Text('Address 2: ${ownerDetails.ownerAddress2}'),
-              const SizedBox(height: 10,),
-              Text('Pin Code: ${ownerDetails.pinCode}'),
-              const SizedBox(height: 10,),
-              Text('City: ${ownerDetails.city}'),
-              const SizedBox(height: 10,),
-              Text('State: ${ownerDetails.city}'),
-              const SizedBox(height: 10,),
-              Text('PAN: ${ownerDetails.pan}'),
-              const SizedBox(height: 20,),
+              TextFormFieldWidgets(label: 'Name', validateMsg: '', textEditingController: ownerNameCtrl),
+              TextFormFieldWidgets(label: 'Address 1', validateMsg: '', textEditingController: ownerAddress1Ctrl),
+              TextFormFieldWidgets(label: 'Address 2', validateMsg: '', textEditingController: ownerAddress2Ctrl),
+              TextFormFieldWidgets(label: 'Pin Code', validateMsg: '', textEditingController: ownerPinCodeCtrl),
+              TextFormFieldWidgets(label: 'City', validateMsg: '', textEditingController: ownerCityDropdownCtrl),
+              TextFormFieldWidgets(label: 'State', validateMsg: '', textEditingController: ownerStateDropdownCtrl),
+              TextFormFieldWidgets(label: 'Pan', validateMsg: '', textEditingController: ownerPANCtrl),
 
               Text('Tenant Details',style: TextStyle(fontSize: MySize.kHeading1),),
               // Text('Name ${1}: ${tenantDetails.tenantName[0]}'),

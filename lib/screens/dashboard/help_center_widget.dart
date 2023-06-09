@@ -23,7 +23,7 @@ class _HelpCenterWidgetState extends State<HelpCenterWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(right: 10,left: 10,top: 20),
+        padding: const EdgeInsets.only(right: 20,left: 20,top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -128,8 +128,9 @@ class _HelpCenterWidgetState extends State<HelpCenterWidget> {
                 ),
               ),
             ),
+            SizedBox(height: 20,),
             SizedBox(
-              height: 45,
+              height: 50,
               width: double.infinity,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(

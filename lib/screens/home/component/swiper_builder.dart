@@ -32,15 +32,13 @@ class _SwiperBuilderState extends State<SwiperBuilder> {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Swiper(
-            itemWidth: MySize.kScreenWidth/1.3,
-            itemHeight: MySize.kScreenHeight/5,
+            itemWidth: 340,
+            itemHeight: 200,
             loop: true,
             duration: 520,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return Container(
-                width: 250,
-                height: 400,
                 decoration: BoxDecoration(
                   color: cardColor[index],
                   borderRadius: BorderRadius.circular(20),

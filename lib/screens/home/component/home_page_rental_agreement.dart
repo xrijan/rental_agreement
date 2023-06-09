@@ -35,8 +35,8 @@ class _RentalAgreementState extends State<RentalAgreement> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: MySize.kSizeBoxHeight10,
+        const SizedBox(
+          height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,8 +53,8 @@ class _RentalAgreementState extends State<RentalAgreement> {
               child: Column(
                 children: [
                   Container(
-                    width: MySize.kScreenHeight * 0.065,
-                    height: MySize.kScreenHeight * 0.065,
+                    width: 60,
+                    height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: [
@@ -69,7 +69,7 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[0]['icon'],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(agreementItem[0]['title']),
@@ -85,8 +85,8 @@ class _RentalAgreementState extends State<RentalAgreement> {
               child: Column(
                 children: [
                   Container(
-                    width: MySize.kScreenHeight * 0.065,
-                    height: MySize.kScreenHeight * 0.065,
+                    width: 60,
+                    height:60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: [
@@ -101,7 +101,7 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[1]['icon'],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(agreementItem[1]['title']),
@@ -120,8 +120,8 @@ class _RentalAgreementState extends State<RentalAgreement> {
               child: Column(
                 children: [
                   Container(
-                    width: MySize.kScreenHeight * 0.065,
-                    height: MySize.kScreenHeight * 0.065,
+                    width: 60,
+                    height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: [
@@ -136,7 +136,7 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[2]['icon'],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(agreementItem[2]['title']),
@@ -151,8 +151,8 @@ class _RentalAgreementState extends State<RentalAgreement> {
               child: Column(
                 children: [
                   Container(
-                    width: MySize.kScreenHeight * 0.065,
-                    height: MySize.kScreenHeight * 0.065,
+                    width: 60,
+                    height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: [
@@ -167,7 +167,7 @@ class _RentalAgreementState extends State<RentalAgreement> {
                     ),
                     child: agreementItem[3]['icon'],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(agreementItem[3]['title']),

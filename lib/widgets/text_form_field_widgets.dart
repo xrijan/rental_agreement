@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
-import '../constants/size.dart';
+
 
 
 class TextFormFieldWidgets extends StatefulWidget {
@@ -20,9 +19,9 @@ class _TextFormFieldWidgetsState extends State<TextFormFieldWidgets> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 15),
       child: SizedBox(
-        height: MySize.kTextFieldHeight,
+        height: 45,
         child: TextField(
           cursorColor: MyColors.kSecondaryTextColor,
           controller: widget.textEditingController,

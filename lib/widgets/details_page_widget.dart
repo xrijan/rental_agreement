@@ -26,14 +26,11 @@ class DetailsPageWidget extends StatefulWidget {
 class _DetailsPageWidgetState extends State<DetailsPageWidget> {
   final dropDownList = DropDownList();
 
-  ///owner
-  final _ownerFormKey = GlobalKey<FormState>();
 
   final stateDropdownCtrl = TextEditingController(),
       cityDropdownCtrl = TextEditingController();
 
   ///tenent
-  final _tenentFormKey = GlobalKey<FormState>();
   final idDropdownCtrl = TextEditingController();
 
   ///property
@@ -255,13 +252,6 @@ class _DetailsPageWidgetState extends State<DetailsPageWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(ownerDetails.ownerName),
-        Text(ownerDetails.ownerAddress1),
-        Text(ownerDetails.ownerAddress2),
-        Text(ownerDetails.pinCode),
-        Text(ownerDetails.city),
-        Text(ownerDetails.state),
-        Text(ownerDetails.pan),
         Text(
           "Please fill the Tenant details",
           style: TextStyle(fontSize: MySize.kHeading2),

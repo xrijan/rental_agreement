@@ -147,7 +147,7 @@ class VerificationState extends State<Verification> {
                               if (_isResendAgain) return;
                               resend();
                             },
-                            child: Text(_isResendAgain ? "Try again in $_start" : "Resend", style: const TextStyle(color: Colors.blueAccent),)
+                            child: Text(_isResendAgain ? "Try again in $_start" : "Resend", style: const TextStyle(color: Color(0XFF0f172a)),)
                         )
                       ],
                     ),
@@ -170,7 +170,6 @@ class VerificationState extends State<Verification> {
                                   page: const MainPage(),
                                 ),
                               );
-                              Navigator.pushNamed(context, '/main');
                             },
                             child: Text(
                               'Continue',

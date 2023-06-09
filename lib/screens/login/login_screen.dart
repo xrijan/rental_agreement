@@ -29,13 +29,7 @@ class _LogInScreenState extends State<LogInScreen> {
     return Scaffold(
       backgroundColor: Color(0XFF0f172a),
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const ImageIcon(
-            AssetImage('assets/icons/angle-left.png'),
-            size: 30,
-          ),
-        ),
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: Color(0XFF0f172a),
       ),
@@ -177,9 +171,11 @@ class _LogInScreenState extends State<LogInScreen> {
                           )),
                     ),
                     const SizedBox(height: 10,),
-                    Text(
-                      'By Continuing you will agree our all terms and condition',
-                      style: TextStyle(fontSize: MySize.kHeading3,color: Colors.black54),
+                    Center(
+                      child: Text(
+                        'By Continuing you will agree our all terms and condition',
+                        style: TextStyle(fontSize: MySize.kHeading3,color: Colors.black54),
+                      ),
                     ),
                     const SizedBox(height: 10,),
                   ],
