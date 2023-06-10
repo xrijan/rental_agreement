@@ -34,6 +34,7 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
   final anyOthersClausesCtrl = TextEditingController();
   final monthlyMaintenanceAmountCtrl = TextEditingController();
 
+
   @override
   void dispose() {
     electricityWaterBillPayCtrl.dispose();
@@ -138,7 +139,7 @@ class _UtilitiesPageState extends State<UtilitiesPage> {
               TextFormFieldWidgets(
                 label: 'Monthly maintenance amount to be paid by',
                 validateMsg: 'please enter',
-                textEditingController: anyOthersClausesCtrl,
+                textEditingController: monthlyMaintenanceAmountCtrl,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),

@@ -18,8 +18,9 @@ class _DocumentsAndLockersWidgetState extends State<DocumentsAndLockersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10,left: 10,top: 20),
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
